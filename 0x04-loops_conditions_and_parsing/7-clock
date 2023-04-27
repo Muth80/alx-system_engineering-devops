@@ -5,11 +5,12 @@ hours=0
 
 while [ $hours -le 12 ]
 do
-	minutes=1
-	while [ $minutes -le 59 ]
+	echo "Hour: $hour"
+	minute=1
+	while [ $minute -le 59 ]
 	do
-		printf "%02d:%02d\n" $hours $minutes
-		minutes=$((minutes+1))
+		echo "$minute"
+		(( munite++ ))
 	done
-	hours=$((hours+1))
+	(( hour++ ))
 done
