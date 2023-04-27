@@ -11,5 +11,5 @@ do
 		printf "%02d:%02d\n" $hours $minutes
 		minutes=$((minutes+1))
 	done
-		hours=$((hours+1))
+	hours=$((hours+1))
 done
