@@ -4,4 +4,4 @@
 # user-oriented format, showing process hierarchy.
 # Use the ps command with options to display all processes in a tree-like format
 
-ps -a -x -j -f
+ps -a -x -u -f
