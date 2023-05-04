@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Get the list of listening sockets
+netstat -lnptu | awk '/LISTEN/ {print $1, $4, $7}' | while read proto local foreign program
+do
+	# Extract the IP address and port number
+	local_ip=$(echo "$local" | cut -d ":" -f 1)
+	local_port=$(echo "$local" | cut -d ":" -f 2)
+
+	# Extract the program name and PID
+	pid=$(echo "$program" | cut -d "/" -f 1)
+	program_name=$(echo "$program" | cut -d "/" -f 2-)
+
+	# Print the output
+	printf "%-4s %-5s %-21s %-21s %s\n" "$proto" "$pid" "$program_name" "$local_ip:$local_port" "$foreign"
+done
