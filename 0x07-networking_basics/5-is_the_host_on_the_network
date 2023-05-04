@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# The line checks if there is no argument passed to the script.
+# If there is no argument, it prints the usage message and exits.
+
+if [ -z "$1" ]; then
+	echo "Usage: $0 {IP_ADDRESS}"
+	exit 1
+fi
+
+ping -c 5 $1
