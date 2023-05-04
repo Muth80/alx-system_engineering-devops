@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# This script uses ifconfig to get information about the network interfaces on the machine,
+# filters out any lines that don't contain an IPv4 address using grep, and then extracts the IP
+# address from each line using awk. The resulting list of IP addresses is printed to the console.
+
+ifconfig | grep "inet " | awk '{print $2}'
