@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# This script builds a Docker image and runs a container with Apache serving a page containing "Hello Holberton"
+
+# Create a temporary directory for the Docker context
+mkdir temp_docker_context
+cd temp_docker_context
+
+# Create the Apache configuration file
+echo "<VirtualHost *:80>
+    DocumentRoot /var/www/html
+</VirtualHost>" > 000-default.conf
+
+# Create the index.html file
+echo "<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Holberton</title>
+</head>
+<body>
+    <h1>Hello Holberton</h1>
+</body>
+</html>" > index.html
+
+# Create the Dockerfile
+echo "FROM ubuntu:latest
+
+RUN apt-get update && apt-get install -y apache2
+
+COPY 000-default.conf /etc/apache2/sites-available/
+COPY index.html /var/www/html/
+
+CMD [\"apache2ctl\", \"-D\", \"FOREGROUND\"]" > Dockerfile
+
+# Build the Docker image
+docker build -t holbertonschool/265-0 .
+
+# Run the container
+docker run -p 8080:80 -d -it holbertonschool/265-0
+
+# Cleanup: remove temporary directory
+cd ..
+rm -rf temp_docker_context
+
