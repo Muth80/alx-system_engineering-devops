@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Install Nginx if it's not already installed
+if ! dpkg -s nginx &> /dev/null; then
+    apt-get update
+    apt-get install -y nginx
+fi
+
+# Configure the Nginx redirection
+sed -i '/location \/ {/a \    location /redirect_me {\n        return 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n    }' /etc/nginx/sites-available/default
+
+# Restart Nginx
+service nginx restart
