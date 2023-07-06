@@ -1,0 +1,15 @@
+frontend www-http
+    bind *:80
+    reqadd X-Forwarded-Proto:\ http
+    redirect scheme https code 301 if !{ ssl_fc }
+    
+frontend www-https
+    bind *:443 ssl crt /etc/letsencrypt/live/www.holberton.online/fullchain.pem
+    reqadd X-Forwarded-Proto:\ https
+    default_backend www-backend
+
+backend www-backend
+    mode http
+    balance roundrobin
+    server webserver1 100.26.157.96 check
+    server webserver2 54.160.71.55 check
