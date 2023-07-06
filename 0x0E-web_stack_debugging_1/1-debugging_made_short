@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# This script installs and configures Nginx to listen on port 80
+
+apt-get update
+apt-get install nginx -y
+echo "server { listen 80; location / { root /var/www/html; index index.html index.htm; }}" > /etc/nginx/sites-available/default
+service nginx stop
+service nginx start
