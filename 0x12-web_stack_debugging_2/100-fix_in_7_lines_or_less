@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "Executing script..."
+echo "Updating system..."
+sudo apt-get update
+echo "Upgrading system..."
+sudo apt-get upgrade -y
+echo "Clean-up..."
+sudo apt-get autoremove -y
+echo "Done."
