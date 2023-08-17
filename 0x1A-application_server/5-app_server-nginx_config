@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+server {
+
+    listen 80;
+    listen [::]:80 default_server;
+
+    location / {
+        proxy_pass http://127.0.0.1:5003;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location /static {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+        expires 30d;
+    }
+};
